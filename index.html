@@ -4,14 +4,17 @@
 	<title>Search IP Address Data</title>
 	<meta charset="utf-8">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="index.css">
 </head>
 <body>
+  <div class="box"><br><br>
 	<h1>Search IP Address Data</h1>
-	<button id = 'ng'>IP</button>
-    <div id="ip-address"></div>
-	<input type="text" id="ip-input">
-	<button id="search-button">Search</button>
+	<button id = 'ng' class="btn default">Know Your IP</button><br><br>
+    <div id="ip-address"></div><br><br>
+	<input class="first" type="text" id="ip-input" placeholder="ENTER IP"><br><br>
+	<button class="second" id="search-button">Search</button><br><br>
 	<div id="result"></div>
+  </div>
 	<script>
 		$(document).ready(function(){
             $("#ng").click(function(){
