@@ -7,25 +7,37 @@
 </head>
 <body>
 	<h1>Search IP Address Data</h1>
+	<button id = 'ng'>IP</button>
+    <div id="ip-address"></div>
 	<input type="text" id="ip-input">
 	<button id="search-button">Search</button>
 	<div id="result"></div>
 	<script>
 		$(document).ready(function(){
-			$("#search-button").click(function(){
-				var ip = $("#ip-input").val();
-				$.getJSON("ipdata.json", function(data){
-					var result = data.filter(function(item){
-						return item.ip === ip;
-					});
-					if (result.length > 0) {
-						$("#result").text(JSON.stringify(result[0]));
-					} else {
-						$("#result").text("IP address not found");
-					}
-				});
+            $("#ng").click(function(){
+			$.getJSON("ip.json", function(data){
+				$("#ip-address").text(data.ip);
 			});
+        });
 		});
+		$(document).ready(function(){
+  $("#search-button").click(function(){
+    var ip = $("#ip-input").val();
+    $.getJSON("ipdata.json", function(data){
+      var result = data.filter(function(item){
+        return item.ip === ip;
+      });
+      if (result.length > 0) {
+        // Loop through each property of the first result and print its key-value pair
+        Object.keys(result[0]).forEach(function(key) {
+          $("#result").append(key + ": " + result[0][key] + "<br>");
+        });
+      } else {
+        $("#result").text("IP address not found");
+      }
+    });
+  });
+});
 	</script>
 </body>
 </html>
