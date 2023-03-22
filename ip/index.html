@@ -18,7 +18,7 @@
 	<script>
 		$(document).ready(function(){
             $("#ng").click(function(){
-			$.getJSON("https://api.ipify.org/?format=json", function(data){
+			$.getJSON("ip.json", function(data){
 				$("#ip-address").text(data.ip);
 			});
         });
@@ -26,12 +26,20 @@
 		$(document).ready(function(){
   $("#search-button").click(function(){
     var ip = $("#ip-input").val();
-    $.getJSON("https://ipinfo.io/"+ip+"/geo", function(data){
-      Object.keys(data).forEach(function(key) {
-          $("#result").append(key + ": " + data[key] + "<br>");
+    $.getJSON("ipdata.json", function(data){
+      var result = data.filter(function(item){
+        return item.ip === ip;
+      });
+      if (result.length > 0) {
+        // Loop through each property of the first result and print its key-value pair
+        Object.keys(result[0]).forEach(function(key) {
+          $("#result").append(key + ": " + result[0][key] + "<br>");
+        });
+      } else {
+        $("#result").text("IP address not found");
+      }
+    });
   });
-});
-});
 });
 	</script>
 </body>
